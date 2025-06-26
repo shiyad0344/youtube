@@ -1,21 +1,26 @@
-import mongoose from "mongoose"
+//require ('dotenv').config()
+import dotenv from "dotenv"
 // here there are 2 ways to connect the database 1) by using IIFES- immediate invoked function expression
-import { DB_NAME } from "./constants"
-import connectDb from "./db"
-
+import connectDb from "./db/index.js"
+import app from './app.js'
 import express from "express"
+
+dotenv.config({
+  path:'./env'
+})
 
 
 connectDb()
-.then(()=>{
-  app.listen(process.env.PORT || 8000,()=>{
-    console.log(`Server is Running at Port:
-       ${process.env.PORT}`)
-  })
+.then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
+    })
 })
-.catch((error)=>{
-  console.log("MONGO db connection failed !!", error)
+.catch((err) => {
+    console.log("MONGO db connection failed !!! ", err);
 })
+
+
 
 
 
